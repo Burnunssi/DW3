@@ -4,7 +4,7 @@ const getAllAlunos = async () => {
   return (
     await db.query(
       "SELECT *, (SELECT descricao from CURSOS where cursoid = alunos.cursoid)" +
-        "FROM alunos where deleted = false ORDER BY nome ASC"
+      "FROM alunos where deleted = false ORDER BY nome ASC"
     )
   ).rows;
 };
@@ -13,7 +13,7 @@ const getAlunoByID = async (alunoIDPar) => {
   return (
     await db.query(
       "SELECT *, (SELECT descricao from CURSOS where cursoid = alunos.cursoid)" +
-        "FROM alunos WHERE alunoid = $1 and deleted = false ORDER BY nome ASC",
+      "FROM alunos WHERE alunoid = $1 and deleted = false ORDER BY nome ASC",
       [alunoIDPar]
     )
   ).rows;
@@ -53,14 +53,14 @@ const UpdateAlunos = async (alunoREGPar) => {
     linhasAfetadas = (
       await db.query(
         "UPDATE alunos SET " +
-          "prontuario = $2, " +
-          "nome = $3, " +
-          "endereco = $4, " +
-          "rendafamiliar = $5, " +
-          "datanascimento = $6, " +
-          "cursoid = $7, " +
-          "deleted = $8 " +
-          "WHERE alunoid = $1",
+        "prontuario = $2, " +
+        "nome = $3, " +
+        "endereco = $4, " +
+        "rendafamiliar = $5, " +
+        "datanascimento = $6, " +
+        "cursoid = $7, " +
+        "deleted = $8 " +
+        "WHERE alunoid = $1",
         [
           alunoREGPar.alunoid,
           alunoREGPar.prontuario,
@@ -84,20 +84,20 @@ const UpdateAlunos = async (alunoREGPar) => {
 const DeleteAlunos = async (alunoREGPar) => {
   let linhasAfetadas;
   let msg = "ok";
-    
+
   try {
     linhasAfetadas = (
-    await db.query(
-      "UPDATE alunos SET " + "deleted = true " + "WHERE alunoid = $1",
-      [alunoREGPar.alunoid]
-    )
-  ).rowCount;
-} catch (error) {
-  msg = "[mdlAlunos|insertAlunos] " + error.detail;
-  linhasAfetadas = -1;
-}
+      await db.query(
+        "UPDATE alunos SET " + "deleted = true " + "WHERE alunoid = $1",
+        [alunoREGPar.alunoid]
+      )
+    ).rowCount;
+  } catch (error) {
+    msg = "[mdlAlunos|insertAlunos] " + error.detail;
+    linhasAfetadas = -1;
+  }
 
-return { msg, linhasAfetadas };
+  return { msg, linhasAfetadas };
 };
 
 module.exports = {

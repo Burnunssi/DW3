@@ -1,0 +1,67 @@
+### Necessário para pegar o token
+### Post
+# @name loginAutenticado
+POST http://localhost:40000/Login HTTP/1.1
+content-type: application/json
+
+{    
+    "username": "qwe",
+    "password": "qwe"
+}
+### Seta o token
+@accessToken = {{loginAutenticado.response.body.$.token}}
+@username = {{loginAutenticado.response.body.$.username}}
+
+
+### teste de inserção de aluno
+POST http://localhost:40000/insertEscola HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{    
+    "escolaid": 0,
+    "codigo": "pront5",
+    "nome": "Carlos das Matias",
+    "dataAbertura": "2024-12-05",
+    "deleted": false
+}
+
+### teste de buscar todos os Escola
+GET http://localhost:40000/getAllEscola HTTP/1.1
+content-type: application/json
+//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NzQ3ODI5NzksInVzZXJuYW1lIjoicXdlIn0.SlYYCm8J6wlpb3i1jJcSvhSz6VjwKvzPOxza8P6-hzo
+
+{    
+    
+}
+
+### teste de buscar aluno por ID
+POST http://localhost:40000/getEscolaByID HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{    
+    "escolaid": 2
+}
+
+### teste de atualização de aluno
+POST http://localhost:40000/updateEscola HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{    
+    "escolaid": 2,
+    "codigo": "pront1",
+    "nome": "Carlos das Matias",
+    "dataAbertura": "2006-12-05",
+    "deleted": false
+}
+
+### teste de atualização de aluno
+POST http://localhost:40000/deleteEscola HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{    
+    "escolaid": 1
+}

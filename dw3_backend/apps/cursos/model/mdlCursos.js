@@ -12,7 +12,7 @@ const GetCursoByID = async (cursoIDPar) => {
   return (
     await db.query(
       "SELECT * " +
-        "FROM cursos WHERE cursoid = $1 and deleted = false ORDER BY descricao ASC",
+      "FROM cursos WHERE cursoid = $1 and deleted = false ORDER BY descricao ASC",
       [cursoIDPar]
     )
   ).rows;
@@ -49,17 +49,17 @@ const UpdateCursos = async (registroPar) => {
     linhasAfetadas = (
       await db.query(
         "UPDATE cursos SET " +
-          "codigo = $2, " +
-          "descricao = $3, " +
-          "ativo = $4, " +
-          "deleted = $5 " +          
-          "WHERE cursoid = $1",
+        "codigo = $2, " +
+        "descricao = $3, " +
+        "ativo = $4, " +
+        "deleted = $5 " +
+        "WHERE cursoid = $1",
         [
-            registroPar.cursoid  ,
-            registroPar.codigo   ,
-            registroPar.descricao,
-            registroPar.ativo    ,
-            registroPar.deleted  ,          
+          registroPar.cursoid,
+          registroPar.codigo,
+          registroPar.descricao,
+          registroPar.ativo,
+          registroPar.deleted,
         ]
       )
     ).rowCount;
@@ -75,20 +75,20 @@ const UpdateCursos = async (registroPar) => {
 const DeleteCursos = async (registroPar) => {
   let linhasAfetadas;
   let msg = "ok";
-    
+
   try {
     linhasAfetadas = (
-    await db.query(
-      "UPDATE cursos SET " + "deleted = true " + "WHERE cursoid = $1",
-      [registroPar.cursoid]
-    )
-  ).rowCount;
-} catch (error) {
-  msg = "[mdlCursos|DeleteCursos] " + error.detail;
-  linhasAfetadas = -1;
-}
+      await db.query(
+        "UPDATE cursos SET " + "deleted = true " + "WHERE cursoid = $1",
+        [registroPar.cursoid]
+      )
+    ).rowCount;
+  } catch (error) {
+    msg = "[mdlCursos|DeleteCursos] " + error.detail;
+    linhasAfetadas = -1;
+  }
 
-return { msg, linhasAfetadas };
+  return { msg, linhasAfetadas };
 };
 
 

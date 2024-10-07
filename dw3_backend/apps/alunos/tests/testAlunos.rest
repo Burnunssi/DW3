@@ -21,7 +21,7 @@ Authorization: Bearer {{accessToken}}
 
 {    
     "alunoid": 0,
-    "prontuario": "pront3",
+    "prontuario": "pront5",
     "nome": "Carlos das Matias",
     "endereco": " Rua das couves",
     "rendafamiliar": 10000,
