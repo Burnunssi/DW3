@@ -1,9 +1,6 @@
 const axios = require("axios");
 const moment = require("moment");
 
-
-
-
 const manutAlunos = async (req, res) =>
   (async () => {
     //@ Abre o formulário de manutenção de alunos
