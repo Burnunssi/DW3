@@ -14,9 +14,8 @@ require('dotenv').config({ path: envFilePath });
 const port = process.env.PORT
 var rtIndex = require('./routes/rtIndex');
 var rtAlunos = require('./routes/rtAlunos');
+var rtCursos = require('./routes/rtCursos');
 jwtchave = process.env.JWTCHAVE;
-
-
 
 var app = express();
 
@@ -40,12 +39,10 @@ app.use(
   })
 );
 
-
 //@ Descreve os grupos de rotas do SIAD
 app.use('/', rtIndex);
 app.use('/alunos', rtAlunos);
-
-
+app.use('/cursos', rtCursos);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
